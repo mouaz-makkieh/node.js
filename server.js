@@ -45,9 +45,6 @@ const albumsData = [
 app.get("", function(req, res) {
   res.send(albumsData);
 
-
-
-  
 });
 
 
