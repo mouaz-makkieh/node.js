@@ -44,6 +44,10 @@ const albumsData = [
 
 app.get("", function(req, res) {
   res.send(albumsData);
+
+
+
+  
 });
 
 
@@ -58,8 +62,48 @@ app.use(bodyParser.json());
 
 
 app.post("/albums", function(req, res) {
-  console.log("POST /albums route");
-  console.log(req.body);
+  albumsData.push(req,body)
+  console.log(albumsData);
+  res.send(200);
 });
+
+app.get ("/albums",function(req,res){
+    res.send(albumsData)
+});
+
+
+app.delete("/albums/:albumId",function(req,res){
+const index =albumsData.findIndex(function(album){
+    return album.albumId === req.params.albumId;
+})
+albumsData.splice(index,1)
+res.send(201);
+})
+ 
+
+app.get("/albums",function(req,res){
+if(req.query.genre){
+    const albums = albumsData.filter(function(albums){
+        return(
+            album.primaryGenreName.toLowerCase()=== req.query.genre.toLowerCase()
+        )
+    })
+}
+
+});
+
+app.put("albums/:albumId",function(req,res){
+const index =albumsData.findIndex(function(album){
+    return album.albumId === req.params.albumId
+})
+albumsData[index] = req.body;
+res.send(200)
+})
+
+app.listen(3000,function(){
+    console.log("server is listening on port 3000. ready to accpet requests")
+})
+
+
 
 
